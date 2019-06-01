@@ -8,7 +8,7 @@ add_subdirectory(NumCpp)
 
 
 include_directories(${NUMCPP_INCLUDE_DIR})
-add_executable(tester main.cpp)
+add_executable(main main.cpp)
 
-target_link_libraries(tester NumCpp)
-ADD_DEPENDENCIES(tester NumCpp)
+target_link_libraries(main NumCpp)
+ADD_DEPENDENCIES(main NumCpp)

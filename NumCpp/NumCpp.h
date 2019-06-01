@@ -7,19 +7,26 @@
 #include <iostream>
 #include <vector>
 #include <stdarg.h>
-
+using namespace std;
 // TODO: Reference additional headers your program requires here.
 class NumCpp
 {
 private:
+	enum Type { IntList, DoubleList, CharList };
 	va_list arguments;
 	vector<int> intList;
-	enum Type {IntList, DoubleList, CharList};
 	Type type;
-
+	int length = 0;
 public:
 	~NumCpp();
 	NumCpp();
 	NumCpp(int num, ...);
-	void Print();
+	int NumCpp::size();
+	NumCpp operator+(NumCpp const &other);
+	friend ostream &operator<<(ostream &out, NumCpp n);
+	void append(int num);
+	int NumCpp::get(int index);
+	Type NumCpp::getType();
+	void print();
+
 };
