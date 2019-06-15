@@ -1,7 +1,7 @@
 ﻿#include_directories()
 
 set(NUMCPP_SRCS
-   NumCpp.h NumCpp.cpp
+   NumCpp.hpp NumCpp.cpp
 )
 
 SET (LIB_TYPE STATIC)

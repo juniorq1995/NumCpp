@@ -3,33 +3,28 @@
 #ifndef _H_NUMCPP
 #define _H_NUMCPP
 
-#include "NumCpp.h"
-
-using namespace std;
+#include "NumCpp.hpp"
 
 NumCpp::~NumCpp()
 {
-
 }
 
 NumCpp::NumCpp()
 {
-
 }
 
-NumCpp::NumCpp(int num, ...)
+template<typename T>
+NumCpp::NumCpp(T first)
 {
-	/* Initializing arguments to store all values after num */
-	va_start(arguments, num);
-	/* Sum all the inputs; we still rely on the function caller to tell us how
-	 * many there are */
-	for (int i = 0; i < num; i++)
-	{
-		intList.push_back(va_arg(arguments, int));
-		length++;
-	}
-	va_end(arguments);                  // Cleans up the list
-	type = IntList;
+	intList.push_back(first);
+}
+
+template<typename T, typename ...Args>
+NumCpp::NumCpp(T first, Args... args)
+{
+	intList.push_back(first);
+	length++;
+	NumCpp(args...)
 }
 
 int NumCpp::size()
@@ -53,6 +48,23 @@ NumCpp NumCpp::operator+(NumCpp const &other)
 	return newList;
 }
 
+NumCpp NumCpp::operator-(NumCpp const &other)
+{
+	if (length != other.length)
+	{
+		cout << "ERROR, operands must be of same LENGTH and TYPE";
+		//return;
+	}
+	NumCpp newList = NumCpp();
+
+	for (int i = 0; i < other.length; i++)
+	{
+		newList.append(other.intList.at(i) - intList.at(i));
+	}
+	return newList;
+}
+
+
 ostream &operator<<(ostream & out, NumCpp n)
 {
 	out << n.get(0);
@@ -61,6 +73,23 @@ ostream &operator<<(ostream & out, NumCpp n)
 		out << "," << n.get(i);
 	}
 	out << endl;
+	return out;
+}
+
+ostream &operator<<(ostream &out, NumCpp::Type t)
+{
+	if (t == NumCpp::IntList)
+	{
+		out << "IntList";
+	}
+	else if (t == NumCpp::DoubleList)
+	{
+		out << "DoubleList";
+	}
+	else 
+	{
+		out << "CharList";
+	}
 	return out;
 }
 
