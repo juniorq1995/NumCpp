@@ -1,3 +1,5 @@
+#define CATCH_CONFIG_MAIN
+
 #include "NumCpp.hpp"
 #include "catch.hpp"
 
@@ -7,3 +9,4 @@ TEST_CASE("Vectors", "Create vector") {
 	REQUIRE(test.get(1) == 2);
 
 }
+

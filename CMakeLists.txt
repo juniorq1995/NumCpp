@@ -1,18 +1,9 @@
-﻿cmake_minimum_required(VERSION 3.8)
-project (NumCpp)
+cmake_minimum_required(VERSION 3.8)
+project (NumCpp LANGUAGES CXX VERSION 0.0.1)
 
-set(NUMCPP_SRCS
-   NumCpp.hpp NumCpp.cpp
-)
+set(INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
+add_subdirectory(src)
 
-SET (LIB_TYPE STATIC)
-add_library (NumCpp ${LIB_TYPE} ${NUMCPP_SRCS})
+enable_testing()
+add_subdirectory(test)
 
-
-find_package(Catch2 REQUIRED)
-add_executable(foo test.cpp)
-target_link_libraries(foo Catch2::Catch2)
-
-include(CTest)
-include(Catch)
-catch_discover_tests(foo)
