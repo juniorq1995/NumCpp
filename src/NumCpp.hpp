@@ -21,10 +21,18 @@ public:
 	NumCpp();
 
 	template<typename T>
-	NumCpp(T first);
+	NumCpp::NumCpp(T first)
+	{
+		intList.push_back(first);
+	}
 
 	template<typename T, typename ...Args>
-	NumCpp(T first, Args... args);
+	NumCpp::NumCpp(T first, Args... args)
+	{
+		intList.push_back(first);
+		length++;
+		NumCpp(args...)
+	}
 
 	template<typename T>
 	vector<int> arr(initializer_list<T> l)

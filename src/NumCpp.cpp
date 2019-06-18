@@ -13,20 +13,6 @@ NumCpp::NumCpp()
 {
 }
 
-template<typename T>
-NumCpp::NumCpp(T first)
-{
-	intList.push_back(first);
-}
-
-template<typename T, typename ...Args>
-NumCpp::NumCpp(T first, Args... args)
-{
-	intList.push_back(first);
-	length++;
-	NumCpp(args...)
-}
-
 int NumCpp::size()
 {
 	return length;
