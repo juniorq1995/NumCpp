@@ -13,7 +13,7 @@ NumCpp::NumCpp()
 {
 }
 
-int NumCpp::size()
+int NumCpp::getSize()
 {
 	return vLength; // implement for array
 }
