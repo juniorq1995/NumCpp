@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\NumCpp"
+    "\\src",
+    "\\test"
   ],
-  "SelectedNode": "\\NumCpp\\features.txt",
+  "SelectedNode": "\\test\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }

@@ -15,7 +15,7 @@ NumCpp::NumCpp()
 
 int NumCpp::size()
 {
-	return length;
+	return vLength; // implement for array
 }
 
 NumCpp NumCpp::operator+(NumCpp const &other)
@@ -64,17 +64,17 @@ ostream &operator<<(ostream & out, NumCpp n)
 
 ostream &operator<<(ostream &out, NumCpp::Type t)
 {
-	if (t == NumCpp::IntList)
+	if (t == NumCpp::Int)
 	{
-		out << "IntList";
+		out << "Int";
 	}
-	else if (t == NumCpp::DoubleList)
+	else if (t == NumCpp::Double)
 	{
-		out << "DoubleList";
+		out << "Double";
 	}
 	else 
 	{
-		out << "CharList";
+		out << "Char";
 	}
 	return out;
 }
@@ -103,5 +103,74 @@ void NumCpp::print()
 		cout <<","<< intList.at(i);
 	}
 	cout << endl;
+}
+
+int NumCpp::getSum()
+{
+	return sum;
+} 
+
+
+double NumCpp::getMean()
+{
+	return getSum() / getSize();
+}
+
+int NumCpp::getMedian()
+{
+	vector<int> tempVector;
+	int tempSize;
+	if (st == Array)
+	{
+		tempVector = this->order(intArray);
+		tempSize = aSize;
+	}
+	if (st == List)
+	{
+		tempVector = this->order(intList);
+		tempSize = vLength;
+	}
+	if (vLength % 2 == 0)
+		return (tempVector.at(tempSize / 2) + tempVector.at(tempSize / 2)) / 2;
+	else
+		return tempVector.at(tempSize / 2 + 1);
+}
+
+double NumCpp::getVectorStd()
+{
+	double tempMean = getMean();
+	double total = 0.0;
+	for (int i = 0; i < vLength; i++)
+	{
+		total += pow(intList[i] - tempMean, 2.0);
+	}
+	return sqrt(total/ aSize);
+}
+
+double NumCpp::getArrayStd()
+{
+	double tempMean = getMean();
+	double total = 0.0;
+	for (int i = 0; i < vLength; i++)
+	{
+		for (int j = 0; j < aSize; j++)
+		{
+			total += pow(intArray[i][j] - tempMean, 2.0);
+		}
+	}
+	return sqrt(total / aSize);
+}
+
+double NumCpp::getStd()
+{
+	if (st == Array) return getArrayStd();
+	if (st == List) return getVectorStd();
+	/*
+	1. Work out the Mean(the simple average of the numbers)
+	2. Then for each number: subtract the Mean and square the result
+	3. Then work out the mean of those squared differences.
+	4. Take the square root of that and we are done!
+	*/
+
 }
 #endif
